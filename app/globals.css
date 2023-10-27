@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+main {
+  @apply h-full;
+}
+
+.footer {
+  padding-bottom: max(env(safe-area-inset-bottom), 8px);
+}
