@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useCompletion } from "ai/react";
-import Button, { skyColor } from "@/app/components/button";
+import Button, { skyColor } from "@/components/button";
 
 function ResultAI(props: { question: string; gua: string }) {
   const { complete, isLoading, completion } = useCompletion({

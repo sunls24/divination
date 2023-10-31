@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Coin from "@/app/components/coin";
-import Button, { emeraldColor, redColor } from "@/app/components/button";
-import Hexagram from "@/app/components/hexagram";
-import { HexagramObj } from "@/app/components/hexagram";
+import Coin from "@/components/coin";
+import Button, { emeraldColor, redColor } from "@/components/button";
+import Hexagram from "@/components/hexagram";
+import { HexagramObj } from "@/components/hexagram";
 import { bool } from "aimless.js";
-import Result, { ResultObj } from "@/app/components/result";
-import Question from "@/app/components/question";
-import ResultAI from "@/app/components/result-ai";
-import { animateChildren } from "@/app/utils/animate";
+import Result, { ResultObj } from "@/components/result";
+import Question from "@/components/question";
+import ResultAI from "@/components/result-ai";
+import { animateChildren } from "@/lib/animate";
 
 function Divination(props: { guaIndexData: any; guaListData: any }) {
   const [frontList, setFrontList] = useState([true, true, true]);

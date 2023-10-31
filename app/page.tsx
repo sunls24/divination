@@ -1,9 +1,9 @@
-import Nav from "@/app/components/nav";
-import Divination from "@/app/components/divination";
+import Nav from "@/components/nav";
+import Divination from "@/components/divination";
 
-import guaIndex from "./data/gua-index.json";
-import guaList from "./data/gua-list.json";
-import Footer from "@/app/components/footer";
+import guaIndex from "@/lib/data/gua-index.json";
+import guaList from "@/lib/data/gua-list.json";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (

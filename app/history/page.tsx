@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { kv } from "@vercel/kv";
-import { history, KV_DATA } from "@/app/utils/constant";
+import { history, KV_DATA } from "@/lib/constant";
 
 const tdStyle = "border py-2 px-3 sm:px-4 text-stone-600";
 

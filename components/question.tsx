@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import clsx from "clsx";
-import Button from "@/app/components/button";
-import todayJson from "../data/today.json";
+import Button from "@/components/button";
+import todayJson from "@/lib/data/today.json";
 
 const todayData: string[] = todayJson;
 

@@ -2,8 +2,8 @@ import { OpenAI } from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
-import { history, KV_DATA } from "@/app/utils/constant";
-import { getCNDate } from "@/app/utils/utils";
+import { history, KV_DATA } from "@/lib/constant";
+import { getCNDate } from "@/lib/utils";
 
 export const runtime = "edge";
 

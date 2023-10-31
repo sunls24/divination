@@ -1,5 +1,5 @@
 import React from "react";
-import { VERSION } from "@/app/utils/constant";
+import { VERSION } from "@/lib/constant";
 
 function Footer() {
   return (

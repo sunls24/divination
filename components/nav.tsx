@@ -7,6 +7,7 @@ export default function Nav() {
             <img
               className="h-6 w-auto opacity-60 sm:animate-[spin_3s_linear_infinite]"
               src="img/chatgpt.png"
+              draggable={false}
               alt="chatgpt"
             />
             <span className="text-stone-600">AI 算卦</span>
