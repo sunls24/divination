@@ -1,16 +1,18 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Coin from "@/components/coin";
-import Button, { emeraldColor, redColor } from "@/components/button";
-import Hexagram from "@/components/hexagram";
-import { HexagramObj } from "@/components/hexagram";
+import Hexagram, { HexagramObj } from "@/components/hexagram";
 import { bool } from "aimless.js";
 import Result, { ResultObj } from "@/components/result";
 import Question from "@/components/question";
 import ResultAI from "@/components/result-ai";
 import { animateChildren } from "@/lib/animate";
+import { Button } from "@/components/ui/button";
+import guaIndexData from "@/lib/data/gua-index.json";
+import guaListData from "@/lib/data/gua-list.json";
+import { BrainCircuit, ListRestart } from "lucide-react";
 
-function Divination(props: { guaIndexData: any; guaListData: any }) {
+function Divination() {
   const [frontList, setFrontList] = useState([true, true, true]);
   const [rotation, setRotation] = useState(false);
 
@@ -97,8 +99,8 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
     const downIndex =
       (list[2].yang ? 4 : 0) + (list[1].yang ? 2 : 0) + (list[0].yang ? 1 : 0);
 
-    const guaIndex = props.guaIndexData[upIndex][downIndex] - 1;
-    const guaName1 = props.guaListData[guaIndex];
+    const guaIndex = guaIndexData[upIndex][downIndex] - 1;
+    const guaName1 = guaListData[guaIndex];
 
     let guaName2;
     if (upIndex === downIndex) {
@@ -111,9 +113,9 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
     const guaDesc = guaDict1[upIndex] + "上" + guaDict1[downIndex] + "下";
 
     setResultObj({
-      // 26.山天大畜
+      // 例：26.山天大畜
       guaMark: `${(guaIndex + 1).toString().padStart(2, "0")}.${guaName2}`,
-      // 周易第26卦_大畜卦(山天大畜)_艮上乾下
+      // 例：周易第26卦_大畜卦(山天大畜)_艮上乾下
       guaResult: `周易第${
         guaIndex + 1
       }卦_${guaName1}卦(${guaName2}_${guaDesc})`,
@@ -125,9 +127,9 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
   const showResult = resultObj !== null;
   const inputQuestion = question === "";
   return (
-    <div
+    <main
       ref={flexRef}
-      className="mx-auto flex w-[90%] flex-col flex-nowrap items-center gap-5 sm:gap-8"
+      className="gap mx-auto flex h-0 w-[90%] flex-1 flex-col flex-nowrap items-center"
     >
       <Question question={question} setQuestion={setQuestion} />
 
@@ -140,9 +142,11 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
       )}
 
       {!inputQuestion && !showResult && (
-        <div>
-          <Button value={"卜筮"} onClick={startClick} disable={rotation} />
-          <span className="absolute pl-1 pt-2 italic text-stone-500">{`(${hexagramList.length}/6)`}</span>
+        <div className="relative">
+          <Button onClick={startClick} disabled={rotation} size="sm">
+            卜筮
+          </Button>
+          <span className="absolute bottom-0 pl-2 text-muted-foreground">{`${hexagramList.length}/6`}</span>
         </div>
       )}
 
@@ -155,18 +159,19 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
           <Result {...resultObj} />
           <div className="flex gap-4">
             <Button
-              value="↻ 重来"
+              size="sm"
+              variant="destructive"
               onClick={restartClick}
-              disable={rotation}
-              buttonColor={redColor}
-            />
+              disabled={rotation}
+            >
+              <ListRestart size={18} className="mr-1" />
+              重来
+            </Button>
             {resultAi ? null : (
-              <Button
-                value="🤖 AI 解读"
-                onClick={aiClick}
-                disable={rotation}
-                buttonColor={emeraldColor}
-              />
+              <Button size="sm" onClick={aiClick} disabled={rotation}>
+                <BrainCircuit size={16} className="mr-1" />
+                AI 解读
+              </Button>
             )}
           </div>
         </>
@@ -180,7 +185,7 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
           }`}
         />
       )}
-    </div>
+    </main>
   );
 }
 

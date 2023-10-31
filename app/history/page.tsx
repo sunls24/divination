@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { kv } from "@vercel/kv";
 import { history, KV_DATA } from "@/lib/constant";
 
-const tdStyle = "border py-2 px-3 sm:px-4 text-stone-600";
+const tdStyle = "border py-2 px-3 sm:px-4";
 
 async function Page() {
   const data = await kv.lrange<history>(KV_DATA, 0, 100);
@@ -21,7 +21,7 @@ async function Page() {
           {data.map((value, index) => {
             const sp = value.date.split(" ");
             return (
-              <tr key={index} className="odd:bg-stone-50 even:bg-stone-100">
+              <tr key={index} className="odd:bg-background even:bg-secondary">
                 <td className={clsx(tdStyle, "text-center")}>
                   {sp.length == 2 && (
                     <>

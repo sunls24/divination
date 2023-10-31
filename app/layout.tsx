@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="cn">
-      <body className="bg-stone-50 text-stone-700">
+      <body>
         {children}
         {!!process.env.VERCEL && <Analytics />}
       </body>

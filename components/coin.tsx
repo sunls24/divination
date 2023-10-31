@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
+import Image from "next/image";
 
-const rotationDuration = 5000;
+const rotationDuration = 4000;
 const bezier = "cubic-bezier(0.645,0.045,0.355,1)";
 
 function Coin(props: {
@@ -27,7 +28,7 @@ function Coin(props: {
   });
 
   return (
-    <div className="flex w-full max-w-md justify-around rounded-md border bg-stone-100 p-4 shadow sm:p-6">
+    <div className="flex w-full max-w-md justify-around rounded-md border bg-secondary p-4 shadow sm:p-6">
       {props.frontList.map((value, index) => (
         <CoinItem
           key={index}
@@ -48,10 +49,10 @@ function CoinItem(props: {
 }) {
   let animate = "";
   if (props.rotation) {
-    // animate-[coin-front-front_5s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-front-back_5s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-back-front_5s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-back-back_5s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-front-front_4s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-front-back_4s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-back-front_4s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-back-back_4s_cubic-bezier(0.645,0.045,0.355,1)]
     animate = `animate-[coin-${getFront(props.lastFront)}-${getFront(
       props.front,
     )}_${rotationDuration / 1000}s_${bezier}]`;
@@ -65,17 +66,23 @@ function CoinItem(props: {
       }}
       className={clsx("h-16 w-16 sm:h-20 sm:w-20", animate)}
     >
-      <img
+      <Image
+        width={0}
+        height={0}
+        sizes="100vw"
         draggable={false}
-        className="absolute h-16 sm:h-20"
-        src="img/head.png"
+        className="absolute w-full"
+        src="/img/head.png"
         alt="coin"
       />
-      <img
+      <Image
+        width={0}
+        height={0}
+        sizes="100vw"
         draggable={false}
-        className="absolute h-16 sm:h-20"
+        className="absolute h-full w-full"
         style={{ transform: "translateZ(-1px)" }}
-        src="img/tail.png"
+        src="/img/tail.png"
         alt="coin"
       />
     </div>

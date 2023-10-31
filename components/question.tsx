@@ -1,7 +1,9 @@
 import React, { createRef } from "react";
 import clsx from "clsx";
-import Button from "@/components/button";
 import todayJson from "@/lib/data/today.json";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
 
 const todayData: string[] = todayJson;
 
@@ -23,29 +25,26 @@ function Question(props: { question: string; setQuestion: any }) {
   return (
     <div
       className={clsx(
-        "ignore-animate mx-auto flex w-full max-w-md flex-col gap-3",
+        "ignore-animate flex w-full max-w-md flex-col gap-4",
         props.question || "pt-6",
       )}
     >
       {props.question === "" ? (
         <>
-          <label className="text-stone-600">您想算点什么？</label>
-          <textarea
+          <label>您想算点什么？</label>
+          <Textarea
             ref={inputRef}
             placeholder="将使用 AI 为您解读"
-            className={clsx(
-              "block w-full rounded-md border bg-stone-50 p-2 text-sm shadow",
-              "focus:border-stone-600 focus:outline-none focus:ring-1 focus:ring-stone-500",
-              "placeholder-stone-500 placeholder:italic",
-              "h-24 resize-none",
-              "text-stone-600",
-            )}
+            className="resize-none"
+            rows={4}
           />
           <div className="flex flex-row-reverse">
-            <Button onClick={startClick} value="开始" />
+            <Button size="sm" onClick={startClick}>
+              开始
+            </Button>
           </div>
 
-          <label className="mt-16 text-stone-600 underline underline-offset-4">
+          <label className="mt-16 underline underline-offset-4">
             🧐 让我猜猜您算什么东西？
           </label>
           <div className="flex flex-wrap gap-3">
@@ -56,7 +55,7 @@ function Question(props: { question: string; setQuestion: any }) {
                   onClick={() => {
                     todayClick(index);
                   }}
-                  className="h-fit w-fit flex-none rounded-md border bg-stone-100 p-2 text-sm text-stone-500 shadow transition hover:scale-105"
+                  className="rounded-md bg-secondary border p-2 text-sm text-muted-foreground shadow transition hover:scale-[1.03]"
                 >
                   {value}
                 </span>
@@ -67,8 +66,14 @@ function Question(props: { question: string; setQuestion: any }) {
       ) : null}
 
       {props.question && (
-        <div className="flex truncate rounded-md border bg-stone-100 p-2 text-stone-600 shadow">
-          <img className="mr-2 h-6" src="img/yin-yang.png" alt="yinyang" />
+        <div className="flex truncate rounded-md border bg-secondary p-2 shadow">
+          <Image
+            width={24}
+            height={24}
+            className="mr-2"
+            src="/img/yin-yang.png"
+            alt="yinyang"
+          />
           {props.question}
         </div>
       )}

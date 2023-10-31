@@ -9,7 +9,7 @@ export interface HexagramObj {
 
 function Hexagram(props: { list: HexagramObj[] }) {
   return (
-    <div className="flex h-52 w-56 flex-col-reverse gap-1.5 overflow-hidden rounded-md border bg-stone-100 py-3 shadow-inner sm:h-60 sm:w-72">
+    <div className="flex h-52 w-56 shrink-0 flex-col-reverse gap-1.5 overflow-hidden rounded-md border bg-secondary py-3 shadow-inner sm:h-60 sm:w-72">
       {props.list.map((value, index) => {
         return (
           <div key={index} className="flex flex-col-reverse gap-1.5">
@@ -45,9 +45,11 @@ function Change(props: { changeYang: boolean | null }) {
     <div className="h-0 w-0">
       <div className="relative -right-1 -top-3">
         {props.changeYang ? (
-          <span className="text-sm text-stone-500">○</span>
+          <span className="text-sm text-muted-foreground">○</span>
         ) : (
-          <span className="relative -right-0.5 text-sm text-stone-500">✕</span>
+          <span className="relative -right-0.5 text-sm text-muted-foreground">
+            ✕
+          </span>
         )}
       </div>
     </div>

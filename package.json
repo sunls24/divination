@@ -1,6 +1,6 @@
 {
   "name": "divination",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,19 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2",
     "@vercel/analytics": "^1.1.1",
-    "@vercel/kv": "^0.2.3",
+    "@vercel/edge-config": "^0.4.1",
+    "@vercel/kv": "^0.2.4",
     "ai": "^2.2.20",
     "aimless.js": "^1.0.4",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "lucide-react": "^0.291.0",
     "next": "14.0.1",
     "openai": "^4.14.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@types/node": "20.8.9",
+    "@types/node": "20.8.10",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",
@@ -32,6 +37,7 @@
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "3.3.5",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2"
   }
 }
