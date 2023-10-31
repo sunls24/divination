@@ -28,7 +28,7 @@ function Divination(props: { guaIndexData: any; guaListData: any }) {
       return;
     }
     const observer = animateChildren(flexRef.current);
-    return observer.disconnect;
+    return () => observer.disconnect();
   }, []);
 
   function onTransitionEnd() {
