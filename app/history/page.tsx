@@ -6,12 +6,19 @@ import { history, KV_DATA } from "@/lib/constant";
 const tdStyle = "border py-2 px-3 sm:px-4";
 
 async function Page() {
+  if (!process.env.KV_REST_API_URL) {
+    return (
+      <div className="mx-auto mt-10 max-w-[90%]">
+        Environment variable <b>KV_REST_API_URL</b> not found
+      </div>
+    );
+  }
   const data = await kv.lrange<history>(KV_DATA, 0, 100);
   return (
     <div className="mx-auto w-[88%] max-w-2xl py-6 sm:py-10">
       <table className="w-full table-fixed shadow">
         <thead>
-          <tr className="bg-stone-100">
+          <tr className="bg-secondary">
             <th className={clsx(tdStyle, "w-1/3")}>时间</th>
             <th className={tdStyle}>问题</th>
             <th className={tdStyle}>卦象</th>

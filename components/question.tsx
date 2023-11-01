@@ -55,7 +55,7 @@ function Question(props: { question: string; setQuestion: any }) {
                   onClick={() => {
                     todayClick(index);
                   }}
-                  className="rounded-md bg-secondary border p-2 text-sm text-muted-foreground shadow transition hover:scale-[1.03]"
+                  className="rounded-md border bg-secondary p-2 text-sm text-muted-foreground shadow transition hover:scale-[1.03] dark:border-0 dark:text-foreground/80 dark:shadow-none"
                 >
                   {value}
                 </span>
@@ -66,7 +66,7 @@ function Question(props: { question: string; setQuestion: any }) {
       ) : null}
 
       {props.question && (
-        <div className="flex truncate rounded-md border bg-secondary p-2 shadow">
+        <div className="flex truncate rounded-md border bg-secondary p-2 shadow dark:border-0 dark:shadow-none">
           <Image
             width={24}
             height={24}

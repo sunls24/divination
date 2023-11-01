@@ -11,7 +11,7 @@ function Result(props: ResultObj) {
   return (
     <div className="flex flex-col items-center">
       <a
-        className="flex items-center gap-1 font-medium text-sky-500 transition-colors hover:text-sky-600 hover:underline hover:underline-offset-4"
+        className="flex items-center gap-1 font-medium text-primary/80 underline underline-offset-4 transition-colors hover:text-primary/100"
         href={`https://yijing.sunls.live/${props.guaMark}/`}
         target="_blank"
       >
