@@ -11,8 +11,21 @@ import { Button } from "@/components/ui/button";
 import guaIndexData from "@/lib/data/gua-index.json";
 import guaListData from "@/lib/data/gua-list.json";
 import { BrainCircuit, ListRestart } from "lucide-react";
+import { useCompletion } from "ai/react";
 
 function Divination() {
+  const { complete, isLoading, completion, error, stop } = useCompletion({
+    api: "/api/openai",
+  });
+
+  function onCompletion() {
+    complete(
+      `${resultObj!.guaMark}+${resultObj!.guaResult}+${
+        resultObj!.guaChange
+      }+${question}`,
+    );
+  }
+
   const [frontList, setFrontList] = useState([true, true, true]);
   const [rotation, setRotation] = useState(false);
 
@@ -63,15 +76,24 @@ function Divination() {
     setRotation(true);
   }
 
+  async function testClick() {
+    console.debug("Divination.testClick");
+    for (let i = 0; i < 6; i++) {
+      onTransitionEnd();
+    }
+  }
+
   function restartClick() {
     setResultObj(null);
     setHexagramList([]);
     setQuestion("");
     setResultAi(false);
+    stop();
   }
 
   function aiClick() {
     setResultAi(true);
+    onCompletion();
   }
 
   function setResult(list: HexagramObj[]) {
@@ -179,10 +201,10 @@ function Divination() {
 
       {resultAi && (
         <ResultAI
-          question={question}
-          gua={`${resultObj!.guaMark}+${resultObj!.guaResult}+${
-            resultObj!.guaChange
-          }`}
+          completion={completion}
+          isLoading={isLoading}
+          onCompletion={onCompletion}
+          error={error}
         />
       )}
     </main>
