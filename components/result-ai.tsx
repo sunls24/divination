@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RotateCw } from "lucide-react";
 
@@ -13,11 +13,43 @@ function ResultAI({
   onCompletion: () => void;
   error: Error | undefined;
 }) {
-  const resultRef = useRef<any>(null);
+  const scrollRef = useRef<HTMLElement>(null);
+  const [autoScroll, setAutoScroll] = useState(false);
 
   useEffect(() => {
-    resultRef.current.scrollTop = resultRef.current.scrollHeight;
-  }, [completion, isLoading]);
+    setAutoScroll(isLoading);
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (!autoScroll) {
+      return;
+    }
+    scrollTo();
+  });
+
+  function scrollTo() {
+    requestAnimationFrame(() => {
+      if (
+        !scrollRef.current ||
+        scrollRef.current.scrollHeight ===
+          scrollRef.current.clientHeight + scrollRef.current.scrollTop
+      ) {
+        return;
+      }
+      scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
+    });
+  }
+
+  function onScroll(e: HTMLElement) {
+    if (!isLoading) {
+      return;
+    }
+    const hitBottom = e.scrollTop + e.clientHeight >= e.scrollHeight - 15;
+    if (hitBottom === autoScroll) {
+      return;
+    }
+    setAutoScroll(hitBottom);
+  }
 
   return (
     <div className="h-0 w-full flex-1 sm:max-w-md md:max-w-2xl">
@@ -30,7 +62,8 @@ function ResultAI({
         </div>
       )}
       <article
-        ref={resultRef}
+        ref={scrollRef}
+        onScroll={(e) => onScroll(e.currentTarget)}
         className="max-h-full overflow-auto whitespace-break-spaces rounded-md border p-3 shadow dark:border-0 dark:bg-secondary/90 dark:shadow-none sm:p-5"
       >
         {error ? (
