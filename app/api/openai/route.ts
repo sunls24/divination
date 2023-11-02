@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo-16k",
       stream: true,
-      temperature: 0,
+      temperature: 0.5,
       messages: [
         { role: "system", content: "你是精通周易64卦, 擅长解读卦象的AI助手" },
         {
