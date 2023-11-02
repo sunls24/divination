@@ -2,7 +2,7 @@ import { OpenAI } from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
-import { history, KV_DATA } from "@/lib/constant";
+import { History, KV_DATA } from "@/lib/constant";
 import { getLocaleTime } from "@/lib/utils";
 import { apiKeyPool } from "@/lib/pool";
 
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const guaChange = splitList[2];
 
     if (process.env.KV_REST_API_URL) {
-      kv.lpush<history>(KV_DATA, {
+      kv.lpush<History>(KV_DATA, {
         prompt: prompt,
         gua: guaMark,
         change: guaChange,

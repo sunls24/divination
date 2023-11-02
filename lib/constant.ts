@@ -1,6 +1,6 @@
 export const KV_DATA = "divination";
 
-export interface history {
+export interface History {
   date: string;
   prompt: string;
   gua: string;

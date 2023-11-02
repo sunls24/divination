@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { kv } from "@vercel/kv";
-import { history, KV_DATA } from "@/lib/constant";
+import { History, KV_DATA } from "@/lib/constant";
 
 const tdStyle = "border py-2 px-3 sm:px-4";
 
@@ -13,7 +13,7 @@ async function Page() {
       </div>
     );
   }
-  const data = await kv.lrange<history>(KV_DATA, 0, 100);
+  const data = await kv.lrange<History>(KV_DATA, 0, 100);
   return (
     <div className="mx-auto w-[88%] max-w-2xl py-6 sm:py-10">
       <table className="w-full table-fixed shadow">
