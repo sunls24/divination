@@ -1,35 +1,29 @@
 import React, { useEffect, useRef } from "react";
-import { useCompletion } from "ai/react";
 import { Button } from "@/components/ui/button";
 import { RotateCw } from "lucide-react";
 
-function ResultAI(props: { question: string; gua: string }) {
-  const { complete, isLoading, completion, error, stop } = useCompletion({
-    api: "/api/openai",
-  });
+function ResultAI({
+  completion,
+  isLoading,
+  onCompletion,
+  error,
+}: {
+  completion: string;
+  isLoading: boolean;
+  onCompletion: () => void;
+  error: Error | undefined;
+}) {
   const resultRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (completion !== "") {
-      return;
-    }
-    retryClick();
-    return () => stop();
-  }, []);
 
   useEffect(() => {
     resultRef.current.scrollTop = resultRef.current.scrollHeight;
   }, [completion, isLoading]);
 
-  function retryClick() {
-    complete(`${props.gua}+${props.question}`);
-  }
-
   return (
     <div className="h-0 w-full flex-1 sm:max-w-md md:max-w-2xl">
       {isLoading && (
         <div className="h-0">
-          <div className="relative -top-8 flex items-center text-muted-foreground sm:left-2">
+          <div className="relative -top-8 flex w-fit items-center text-muted-foreground sm:left-2">
             <RotateCw size={16} className="animate-spin" />
             <span className="ml-1 text-sm">AI 分析中...</span>
           </div>
@@ -50,7 +44,7 @@ function ResultAI(props: { question: string; gua: string }) {
         )}
         <br />
         {!isLoading && (
-          <Button onClick={retryClick} size="sm" className="mt-2">
+          <Button onClick={onCompletion} size="sm" className="mt-2">
             <RotateCw size={18} className="mr-1" />
             重新生成
           </Button>
