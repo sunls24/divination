@@ -1,6 +1,6 @@
-# 📌 概述
+# 🧙 概述
 
-**AI 算卦：** 通过6次卜筮的硬币结果生成卦象，并使用 AI 对卦象进行分析
+**AI 算卦：** 通过进行六次硬币的随机卜筮，生成卦象，并使用 AI 对卦象进行分析。
 
 ## ⚙️ 设置
 
@@ -22,12 +22,19 @@ git clone https://github.com/sunls24/divination
 pnpm install
 ```
 
-3. 开发模式：
+3. 本地运行：
 
 ```bash
+# 设置环境变量 OPENAI_API_KEY=sk-xxx
+touch .env.local
+# 本地运行
 pnpm run dev
 ```
 
 ## ☁️ 使用 Vercel 部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsunls23%2Fdivination&env=OPENAI_API_KEY)
+
+---
+
+![screenshots](./docs/screenshots.jpg)
