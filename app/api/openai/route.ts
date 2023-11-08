@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     openai.apiKey = await apiKeyPool.getNextEdge();
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-16k",
+      model: "gpt-3.5-turbo-1106",
       stream: true,
       temperature: 0.5,
       messages: [
