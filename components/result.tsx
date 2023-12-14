@@ -12,7 +12,7 @@ function Result(props: ResultObj) {
     <div className="flex flex-col items-center">
       <a
         className="flex items-center gap-1 font-medium text-primary/80 underline underline-offset-4 transition-colors hover:text-primary/100"
-        href={`https://yijing.sunls.live/${props.guaMark}/`}
+        href={`https://zhouyi.sunls.de/${props.guaMark}/`}
         target="_blank"
       >
         <Link size={18} />

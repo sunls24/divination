@@ -4,12 +4,9 @@ import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { History, KV_DATA } from "@/lib/constant";
 import { getLocaleTime } from "@/lib/utils";
-import { apiKeyPool } from "@/lib/pool";
+import { getOpenAI } from "@/app/api/openai";
 
 export const runtime = "edge";
-
-apiKeyPool.update(process.env.OPENAI_API_KEY ?? "");
-const openai = new OpenAI({ apiKey: "" });
 
 export async function POST(req: Request) {
   try {
@@ -34,12 +31,13 @@ export async function POST(req: Request) {
     }
 
     const res = await fetch(
-      `https://raw.githubusercontent.com/sunls23/yijing64/d69ba05f1b7318402c044f28fb354afef79e9f1a/docs/other/${guaMark}/index.md`,
+      `https://raw.githubusercontent.com/sunls2/zhouyi/main/docs/${guaMark}/index.md`,
     );
     const guaDetail = await res.text();
 
-    openai.apiKey = await apiKeyPool.getNextEdge();
-    const response = await openai.chat.completions.create({
+    const response = await (
+      await getOpenAI()
+    ).chat.completions.create({
       model: "gpt-3.5-turbo-1106",
       stream: true,
       temperature: 0.5,

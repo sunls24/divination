@@ -1,6 +1,7 @@
 import { get } from "@vercel/edge-config";
+import { OPENAI_API_KEY } from "@/lib/constant";
 
-const SEPARATOR = ",";
+export const SEPARATOR = ",";
 
 export class ApiKeyPool {
   private keys = "";
@@ -38,11 +39,9 @@ export class ApiKeyPool {
     if (!process.env.EDGE_CONFIG) {
       return;
     }
-    const keysEdge = await get("OPENAI_API_KEY");
+    const keysEdge = await get(OPENAI_API_KEY);
     if (keysEdge) {
       this.update(keysEdge as string);
     }
   }
 }
-
-export const apiKeyPool = new ApiKeyPool();
