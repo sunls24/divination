@@ -7,6 +7,8 @@
 #### 环境变量
 
 - `OPENAI_API_KEY`：不必多说，懂的都懂
+- `OPENAI_BASE_URL`：自定义 API 接口地址，默认：`https://api.openai.com/v1`
+- `OPENAI_MODEL`：自定义 OpenAI 模型，默认：`gpt-3.5-turbo`
 
 ## 🚀 本地运行
 

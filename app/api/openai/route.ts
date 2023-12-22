@@ -4,9 +4,11 @@ import { NextResponse } from "next/server";
 import { kv } from "@vercel/kv";
 import { History, KV_DATA } from "@/lib/constant";
 import { getLocaleTime } from "@/lib/utils";
-import { getOpenAI } from "@/app/api/openai";
 
 export const runtime = "edge";
+
+const openai = new OpenAI();
+const model = process.env.OPENAI_MODEL ?? "gpt-3.5-turbo";
 
 export async function POST(req: Request) {
   try {
@@ -35,10 +37,8 @@ export async function POST(req: Request) {
     );
     const guaDetail = await res.text();
 
-    const response = await (
-      await getOpenAI()
-    ).chat.completions.create({
-      model: "gpt-3.5-turbo-1106",
+    const response = await openai.chat.completions.create({
+      model: model,
       stream: true,
       temperature: 0.5,
       messages: [
