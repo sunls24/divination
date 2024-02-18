@@ -44,17 +44,17 @@ export async function POST(req: Request) {
       messages: [
         { role: "system", content: "你是精通周易64卦, 擅长解读卦象的AI助手" },
         {
+          role: "system",
+          content:
+            "1.首先对卦象整体情况进行解读\n2.再重点结合要算的事情和变爻情况进行详细解读",
+        },
+        {
           role: "user",
           content: `我想要算的事情是:\`${prompt}\`\n请帮我解读此卦象:\`${guaName}\`\n${guaChange}`,
         },
         {
-          role: "system",
+          role: "user",
           content: `此卦象的详细解释:\n\`\`\`\n${guaDetail}\n\`\`\``,
-        },
-        {
-          role: "system",
-          content:
-            "1.首先对卦象整体情况进行解读\n2.再重点结合要算的事情和变爻情况进行详细解读",
         },
       ],
     });
