@@ -37,8 +37,8 @@ export function animateChildren(
           element: newItem.element,
           x: newItem.x,
           y: newItem.y,
-          height: newItem.height/1.5,
-          width: newItem.width/1.5,
+          height: newItem.height / 1.5,
+          width: newItem.width / 1.5,
         };
       }
 

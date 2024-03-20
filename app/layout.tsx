@@ -40,7 +40,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        {!!process.env.VERCEL && <Analytics />}
+        {process.env.VERCEL && <Analytics />}
       </body>
     </html>
   );
