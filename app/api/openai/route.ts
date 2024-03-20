@@ -46,7 +46,7 @@ export async function POST(req: Request) {
         {
           role: "system",
           content:
-            "1.首先对卦象整体情况进行解读\n2.再重点结合要算的事情和变爻情况进行详细解读",
+            "1.首先对卦象整体情况进行解读\n2.再重点结合要算的事情和变爻情况进行详细分析",
         },
         {
           role: "user",
