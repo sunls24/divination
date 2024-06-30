@@ -71,7 +71,7 @@ function Question(props: { question: string; setQuestion: any }) {
             width={24}
             height={24}
             className="mr-2"
-            src="/img/yin-yang.png"
+            src="/img/yin-yang.webp"
             alt="yinyang"
           />
           {props.question}

@@ -69,7 +69,7 @@ function CoinItem(props: {
         sizes="100vw"
         draggable={false}
         className="absolute w-full"
-        src="/img/head.png"
+        src="/img/head.webp"
         alt="coin"
       />
       <Image
@@ -79,7 +79,7 @@ function CoinItem(props: {
         draggable={false}
         className="absolute h-full w-full"
         style={{ transform: "translateZ(-1px)" }}
-        src="/img/tail.png"
+        src="/img/tail.webp"
         alt="coin"
       />
     </div>
