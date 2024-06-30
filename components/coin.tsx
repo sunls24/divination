@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
 
-const rotationDuration = 4000;
+const rotationDuration = 3800;
 const bezier = "cubic-bezier(0.645,0.045,0.355,1)";
 
 function Coin(props: {
@@ -13,7 +13,6 @@ function Coin(props: {
   const [lastFront, setLastFront] = useState(props.frontList);
 
   useEffect(function () {
-    console.debug("Coin.useEffect, rotation:", props.rotation);
     if (!props.rotation) {
       return;
     }
@@ -49,10 +48,10 @@ function CoinItem(props: {
 }) {
   let animate = "";
   if (props.rotation) {
-    // animate-[coin-front-front_4s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-front-back_4s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-back-front_4s_cubic-bezier(0.645,0.045,0.355,1)]
-    // animate-[coin-back-back_4s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-front-front_3.8s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-front-back_3.8s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-back-front_3.8s_cubic-bezier(0.645,0.045,0.355,1)]
+    // animate-[coin-back-back_3.8s_cubic-bezier(0.645,0.045,0.355,1)]
     animate = `animate-[coin-${getFront(props.lastFront)}-${getFront(
       props.front,
     )}_${rotationDuration / 1000}s_${bezier}]`;

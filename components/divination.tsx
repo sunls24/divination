@@ -11,19 +11,45 @@ import { Button } from "@/components/ui/button";
 import guaIndexData from "@/lib/data/gua-index.json";
 import guaListData from "@/lib/data/gua-list.json";
 import { BrainCircuit, ListRestart } from "lucide-react";
-import { useCompletion } from "ai/react";
+import { getAnswer } from "@/app/server";
+import { readStreamableValue } from "ai/rsc";
 
 function Divination() {
-  const { complete, isLoading, completion, error, stop } = useCompletion({
-    api: "/api/openai",
-  });
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [completion, setCompletion] = useState<string>("");
 
-  function onCompletion() {
-    complete(
-      `${resultObj!.guaMark}+${resultObj!.guaResult}+${
-        resultObj!.guaChange
-      }+${question}`,
-    );
+  function resetAnswer() {
+    setCompletion("");
+    setError("");
+  }
+
+  async function onCompletion() {
+    resetAnswer();
+    setIsLoading(true);
+    try {
+      const { data, error } = await getAnswer(
+        question,
+        resultObj!.guaMark,
+        resultObj!.guaResult,
+        resultObj!.guaChange,
+      );
+      if (error) {
+        setError(error);
+        return;
+      }
+      if (data) {
+        let ret = "";
+        for await (const delta of readStreamableValue(data)) {
+          ret += delta;
+          setCompletion(ret);
+        }
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const [frontList, setFrontList] = useState([true, true, true]);
@@ -165,7 +191,7 @@ function Divination() {
 
       {!inputQuestion && !showResult && (
         <div className="relative">
-          <Button onClick={startClick} disabled={rotation} size="sm">
+          <Button onClick={testClick} disabled={rotation} size="sm">
             卜筮
           </Button>
           <span className="absolute bottom-0 pl-2 text-muted-foreground">{`${hexagramList.length}/6`}</span>

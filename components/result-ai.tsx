@@ -11,7 +11,7 @@ function ResultAI({
   completion: string;
   isLoading: boolean;
   onCompletion: () => void;
-  error: Error | undefined;
+  error: string;
 }) {
   const scrollRef = useRef<HTMLElement>(null);
   const [autoScroll, setAutoScroll] = useState(false);
@@ -70,7 +70,7 @@ function ResultAI({
           <span className="text-destructive">
             ಠ_ಠ 请求出错了！
             <br />
-            {error.message}
+            {error}
           </span>
         ) : (
           completion
