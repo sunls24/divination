@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RotateCw } from "lucide-react";
+import Markdown from "react-markdown";
 
 function ResultAI({
   completion,
@@ -13,7 +14,7 @@ function ResultAI({
   onCompletion: () => void;
   error: string;
 }) {
-  const scrollRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(false);
 
   useEffect(() => {
@@ -61,28 +62,27 @@ function ResultAI({
           </div>
         </div>
       )}
-      <article
+      <div
         ref={scrollRef}
         onScroll={(e) => onScroll(e.currentTarget)}
-        className="max-h-full overflow-auto whitespace-break-spaces rounded-md border p-3 shadow dark:border-0 dark:bg-secondary/90 dark:shadow-none sm:p-5"
+        className="max-h-full overflow-auto rounded-md border p-3 shadow dark:border-0 dark:bg-secondary/90 dark:shadow-none sm:p-5"
       >
         {error ? (
-          <span className="text-destructive">
+          <div className="text-destructive">
             ಠ_ಠ 请求出错了！
             <br />
             {error}
-          </span>
+          </div>
         ) : (
-          completion
+          <Markdown className="prose dark:prose-invert">{completion}</Markdown>
         )}
-        <br />
         {!isLoading && (
           <Button onClick={onCompletion} size="sm" className="mt-2">
             <RotateCw size={18} className="mr-1" />
             重新生成
           </Button>
         )}
-      </article>
+      </div>
     </div>
   );
 }

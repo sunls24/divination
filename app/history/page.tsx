@@ -4,10 +4,10 @@ import clsx from "clsx";
 const tdStyle = "border py-2 px-3 sm:px-4";
 
 async function Page() {
-  if (!process.env.KV_REST_API_URL) {
+  if (!process.env.TODO) {
     return (
       <div className="mx-auto mt-10 max-w-[90%]">
-        Environment variable <b>KV_REST_API_URL</b> not found
+        <b>TODO ...</b>
       </div>
     );
   }

@@ -19,13 +19,9 @@ function Divination() {
   const [isLoading, setIsLoading] = useState(false);
   const [completion, setCompletion] = useState<string>("");
 
-  function resetAnswer() {
-    setCompletion("");
-    setError("");
-  }
-
   async function onCompletion() {
-    resetAnswer();
+    setError("");
+    setCompletion("");
     setIsLoading(true);
     try {
       const { data, error } = await getAnswer(
@@ -46,7 +42,7 @@ function Divination() {
         }
       }
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message ?? err);
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +69,6 @@ function Divination() {
   }, []);
 
   function onTransitionEnd() {
-    console.debug("Divination.onTransitionEnd");
     setRotation(false);
     let frontCount = frontList.reduce((acc, val) => (val ? acc + 1 : acc), 0);
     setHexagramList((list) => {
@@ -94,7 +89,6 @@ function Divination() {
     if (rotation) {
       return;
     }
-    console.debug("Divination.startClick");
     if (hexagramList.length >= 6) {
       setHexagramList([]);
     }
@@ -103,7 +97,6 @@ function Divination() {
   }
 
   async function testClick() {
-    console.debug("Divination.testClick");
     for (let i = 0; i < 6; i++) {
       onTransitionEnd();
     }
@@ -191,7 +184,7 @@ function Divination() {
 
       {!inputQuestion && !showResult && (
         <div className="relative">
-          <Button onClick={testClick} disabled={rotation} size="sm">
+          <Button onClick={startClick} disabled={rotation} size="sm">
             卜筮
           </Button>
           <span className="absolute bottom-0 pl-2 text-muted-foreground">{`${hexagramList.length}/6`}</span>

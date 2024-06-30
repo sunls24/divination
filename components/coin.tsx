@@ -17,9 +17,7 @@ function Coin(props: {
       return;
     }
 
-    console.debug("Coin.useEffect.timeout.start", rotationDuration);
     let id = setTimeout(function () {
-      console.debug("Coin.useEffect.timeout.end");
       setLastFront(props.frontList);
       props.onTransitionEnd();
     }, rotationDuration);
