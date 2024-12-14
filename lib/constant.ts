@@ -1,5 +1,4 @@
-export const KV_DATA = "divination";
-export const OPENAI_API_KEY = "OPENAI_API_KEY";
+export const ERROR_PREFIX = "::error::";
 
 export interface History {
   date: string;

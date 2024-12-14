@@ -6,6 +6,9 @@ import { createStreamableValue } from "ai/rsc";
 const model = process.env.OPENAI_MODEL ?? "gpt-3.5-turbo";
 const openai = createOpenAI({ baseURL: process.env.OPENAI_BASE_URL });
 
+const STREAM_INTERVAL = 60;
+const MAX_SIZE = 6;
+
 export async function getAnswer(
   prompt: string,
   guaMark: string,
@@ -14,12 +17,12 @@ export async function getAnswer(
 ) {
   const stream = createStreamableValue();
   try {
-    const res = await fetch(
-      `https://raw.githubusercontent.com/sunls2/zhouyi/main/docs/${guaMark}/index.md`,
-    );
-    const guaDetail = await res.text();
+    // const res = await fetch(
+    //   `https://raw.githubusercontent.com/sunls2/zhouyi/main/docs/${guaMark}/index.md`,
+    // );
+    // const guaDetail = await res.text();
 
-    const { textStream } = await streamText({
+    const { fullStream } = streamText({
       temperature: 0.5,
       model: openai(model),
       messages: [
@@ -32,19 +35,48 @@ export async function getAnswer(
           role: "user",
           content: `我想要算的事情是:\`${prompt}\`\n请帮我解读此卦象:\`${guaName}\`\n${guaChange}`,
         },
-        {
-          role: "user",
-          content: `此卦象的详细解释:\n\`\`\`\n${guaDetail}\n\`\`\``,
-        },
+        // {
+        //   role: "user",
+        //   content: `此卦象的详细解释:\n\`\`\`\n${guaDetail}\n\`\`\``,
+        // },
       ],
     });
+
+    let buffer = "";
+    let done = false;
+    const intervalId = setInterval(() => {
+      if (done && buffer.length === 0) {
+        clearInterval(intervalId);
+        stream.done();
+        return;
+      }
+      if (buffer.length <= MAX_SIZE) {
+        stream.update(buffer);
+        buffer = "";
+      } else {
+        const chunk = buffer.slice(0, MAX_SIZE);
+        buffer = buffer.slice(MAX_SIZE);
+        stream.update(chunk);
+      }
+    }, STREAM_INTERVAL);
+
     (async () => {
-      for await (const text of textStream) {
-        stream.update(text);
+      for await (const part of fullStream) {
+        switch (part.type) {
+          case "text-delta":
+            buffer += part.textDelta;
+            break;
+          case "error":
+            const err = part.error as any;
+            buffer += err.message ?? err.toString();
+            break;
+        }
       }
     })()
       .catch(console.error)
-      .finally(stream.done);
+      .finally(() => {
+        done = true;
+      });
 
     return { data: stream.value };
   } catch (err: any) {
