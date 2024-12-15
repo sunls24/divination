@@ -14,6 +14,8 @@ import { BrainCircuit, ListRestart } from "lucide-react";
 import { getAnswer } from "@/app/server";
 import { readStreamableValue } from "ai/rsc";
 
+const AUTO_DELAY = 1000;
+
 function Divination() {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,6 +62,16 @@ function Divination() {
 
   const flexRef = useRef<HTMLDivElement>(null);
 
+  const [count, setCount] = useState(0);
+
+  // 自动卜筮
+  useEffect(() => {
+    if (rotation || resultObj || count >= 6 || !question) {
+      return;
+    }
+    setTimeout(startClick, AUTO_DELAY);
+  }, [question, rotation]);
+
   useEffect(() => {
     if (!flexRef.current) {
       return;
@@ -94,6 +106,7 @@ function Divination() {
     }
     setFrontList([bool(), bool(), bool()]);
     setRotation(true);
+    setCount(count + 1);
   }
 
   async function testClick() {
@@ -107,6 +120,7 @@ function Divination() {
     setHexagramList([]);
     setQuestion("");
     setResultAi(false);
+    setCount(0);
     stop();
   }
 
@@ -184,10 +198,13 @@ function Divination() {
 
       {!inputQuestion && !showResult && (
         <div className="relative">
-          <Button onClick={startClick} disabled={rotation} size="sm">
-            卜筮
-          </Button>
-          <span className="absolute bottom-0 pl-2 text-muted-foreground">{`${hexagramList.length}/6`}</span>
+          <span className="pl-2 text-lg font-medium">
+            🎲 第{" "}
+            <span className="font-mono text-xl font-bold text-orange-500">
+              {count === 0 ? "-/-" : `${count}/6`}
+            </span>{" "}
+            次卜筮
+          </span>
         </div>
       )}
 
