@@ -1,9 +1,8 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";
-import { Analytics } from "@vercel/analytics/react";
-import { ThemeProvider } from "@/components/theme-provider";
 import Umami from "@/components/umami";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "AI 算卦 - 在线卜卦 GPT4 解读",
@@ -34,14 +33,13 @@ export default function RootLayout({
     <html lang="cn" suppressHydrationWarning>
       <body>
         <ThemeProvider
+          enableSystem
           attribute="class"
           defaultTheme="system"
-          enableSystem
           disableTransitionOnChange
         >
           {children}
         </ThemeProvider>
-        {process.env.VERCEL && <Analytics />}
         <Umami />
       </body>
     </html>

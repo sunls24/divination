@@ -2,6 +2,7 @@
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createStreamableValue } from "ai/rsc";
+import { ERROR_PREFIX } from "@/lib/constant";
 
 const model = process.env.OPENAI_MODEL ?? "gpt-3.5-turbo";
 const openai = createOpenAI({ baseURL: process.env.OPENAI_BASE_URL });
@@ -15,6 +16,7 @@ export async function getAnswer(
   guaName: string,
   guaChange: string,
 ) {
+  console.log(prompt, guaName, guaChange);
   const stream = createStreamableValue();
   try {
     // const res = await fetch(
@@ -68,7 +70,7 @@ export async function getAnswer(
             break;
           case "error":
             const err = part.error as any;
-            buffer += err.message ?? err.toString();
+            stream.update(ERROR_PREFIX + (err.message ?? err.toString()));
             break;
         }
       }

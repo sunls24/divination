@@ -55,8 +55,9 @@ function ResultAI({
   return (
     <div className="h-0 w-full flex-1 sm:max-w-md md:max-w-2xl">
       {isLoading && (
-        <div className="h-0">
-          <div className="relative -top-8 flex w-fit items-center text-muted-foreground sm:left-2">
+        <div className="flex h-0">
+          <span className="flex-1" />
+          <div className="relative -top-4 flex w-fit items-center pr-1 text-muted-foreground sm:left-2 sm:pr-3">
             <RotateCw size={16} className="animate-spin" />
             <span className="ml-1 text-sm">AI 分析中...</span>
           </div>

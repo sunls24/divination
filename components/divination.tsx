@@ -13,6 +13,7 @@ import { getAnswer } from "@/app/server";
 import { readStreamableValue } from "ai/rsc";
 import { Button } from "./ui/button";
 import { BrainCircuit, ListRestart } from "lucide-react";
+import { ERROR_PREFIX } from "@/lib/constant";
 
 const AUTO_DELAY = 1000;
 
@@ -39,6 +40,10 @@ function Divination() {
       if (data) {
         let ret = "";
         for await (const delta of readStreamableValue(data)) {
+          if (delta.startsWith(ERROR_PREFIX)) {
+            setError(delta.slice(ERROR_PREFIX.length));
+            return;
+          }
           ret += delta;
           setCompletion(ret);
         }
@@ -209,7 +214,7 @@ function Divination() {
       )}
 
       {!inputQuestion && hexagramList.length != 0 && (
-        <div className="flex gap-2">
+        <div className="flex max-w-md gap-2">
           <Hexagram list={hexagramList} />
           {showResult && (
             <div className="flex flex-col justify-around">
