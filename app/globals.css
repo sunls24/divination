@@ -87,7 +87,7 @@
 
 @layer utilities {
   .gap {
-    @apply gap-4 sm:gap-8;
+    @apply gap-4 sm:gap-6;
   }
 }
 

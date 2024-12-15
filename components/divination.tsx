@@ -7,12 +7,12 @@ import Result, { ResultObj } from "@/components/result";
 import Question from "@/components/question";
 import ResultAI from "@/components/result-ai";
 import { animateChildren } from "@/lib/animate";
-import { Button } from "@/components/ui/button";
 import guaIndexData from "@/lib/data/gua-index.json";
 import guaListData from "@/lib/data/gua-list.json";
-import { BrainCircuit, ListRestart } from "lucide-react";
 import { getAnswer } from "@/app/server";
 import { readStreamableValue } from "ai/rsc";
+import { Button } from "./ui/button";
+import { BrainCircuit, ListRestart } from "lucide-react";
 
 const AUTO_DELAY = 1000;
 
@@ -209,30 +209,31 @@ function Divination() {
       )}
 
       {!inputQuestion && hexagramList.length != 0 && (
-        <Hexagram list={hexagramList} />
-      )}
-
-      {showResult && (
-        <>
-          <Result {...resultObj} />
-          <div className="flex gap-4">
-            <Button
-              size="sm"
-              variant="destructive"
-              onClick={restartClick}
-              disabled={rotation}
-            >
-              <ListRestart size={18} className="mr-1" />
-              重来
-            </Button>
-            {resultAi ? null : (
-              <Button size="sm" onClick={aiClick} disabled={rotation}>
-                <BrainCircuit size={16} className="mr-1" />
-                AI 解读
-              </Button>
-            )}
-          </div>
-        </>
+        <div className="flex gap-2">
+          <Hexagram list={hexagramList} />
+          {showResult && (
+            <div className="flex flex-col justify-around">
+              <Result {...resultObj} />
+              <div className="flex flex-col gap-2 sm:px-6">
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  onClick={restartClick}
+                  disabled={rotation}
+                >
+                  <ListRestart size={18} className="mr-1" />
+                  重来
+                </Button>
+                {resultAi ? null : (
+                  <Button size="sm" onClick={aiClick} disabled={rotation}>
+                    <BrainCircuit size={16} className="mr-1" />
+                    AI 解读
+                  </Button>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {resultAi && (
