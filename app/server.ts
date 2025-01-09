@@ -42,6 +42,7 @@ export async function getAnswer(
         //   content: `此卦象的详细解释:\n\`\`\`\n${guaDetail}\n\`\`\``,
         // },
       ],
+      maxRetries: 0,
     });
 
     let buffer = "";

@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { BrainCircuit, ListRestart } from "lucide-react";
 import { ERROR_PREFIX } from "@/lib/constant";
 
-const AUTO_DELAY = 1000;
+const AUTO_DELAY = 600;
 
 function Divination() {
   const [error, setError] = useState<string>("");
