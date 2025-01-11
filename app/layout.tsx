@@ -31,6 +31,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="cn" suppressHydrationWarning>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://registry.npmmirror.com/lxgw-wenkai-screen-web/latest/files/lxgwwenkaiscreen/result.css"
+        />
+      </head>
       <body>
         <ThemeProvider
           enableSystem

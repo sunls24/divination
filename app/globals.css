@@ -75,6 +75,11 @@
     @apply gap flex flex-col bg-background text-foreground;
   }
 
+  body {
+    font-family: 'LXGW WenKai Screen';
+    font-weight: normal;
+  }
+
   body,
   html {
     @apply h-full;
