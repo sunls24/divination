@@ -30,6 +30,7 @@ function Divination() {
       const { data, error } = await getAnswer(
         question,
         resultObj!.guaMark,
+        resultObj!.guaTitle,
         resultObj!.guaResult,
         resultObj!.guaChange,
       );
@@ -175,12 +176,11 @@ function Divination() {
     setResultObj({
       // 例：26.山天大畜
       guaMark: `${(guaIndex + 1).toString().padStart(2, "0")}.${guaName2}`,
-      // 例：周易第26卦_大畜卦(山天大畜)_艮上乾下
-      guaResult: `周易第${
-        guaIndex + 1
-      }卦_${guaName1}卦(${guaName2}_${guaDesc})`,
+      guaTitle: `周易第${guaIndex + 1}卦`,
+      // 例：大畜卦(山天大畜)_艮上乾下
+      guaResult: `${guaName1}卦(${guaName2})_${guaDesc}`,
       guaChange:
-        changeList.length === 0 ? "无变爻" : `变爻：${changeList.toString()}`,
+        changeList.length === 0 ? "无变爻" : `变爻: ${changeList.toString()}`,
     });
   }
 
