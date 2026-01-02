@@ -1,6 +1,10 @@
 # 🧙 概述
 
-**AI 算卦：** 通过进行六次硬币的随机卜筮，生成卦象，并使用 AI 对卦象进行分析。
+**AI 算卦：** 通过进行六次硬币的随机卜筮，生成卦象，并使用 AI 对卦象进行解读。
+
+[预览地址](https://divination.sunls.vercel.app)
+
+[**V2版本** (暂不开源)](https://divination.sunls.de/)：添加**生辰八字**和**周公解梦**模块
 
 ## ⚙️ 设置
 
@@ -35,7 +39,7 @@ pnpm run dev
 
 ## ☁️ 使用 Vercel 部署
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsunls23%2Fdivination&env=OPENAI_API_KEY)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsunls24%2Fdivination&env=OPENAI_API_KEY)
 
 ---
 
